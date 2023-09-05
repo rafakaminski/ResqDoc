@@ -616,7 +616,7 @@ progress {
 }
 
     .blockquote-footer::before {
-        content: "— ";
+        content: "ï¿½ï¿½";
     }
 
 .img-fluid {
@@ -12678,8 +12678,8 @@ section.cta {
 
 .masthead {
     background-color: #f8f9fa;
-    padding-top: 9.5rem;
-    padding-bottom: 5rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
 }
 
     .masthead .masthead-device-mockup {
