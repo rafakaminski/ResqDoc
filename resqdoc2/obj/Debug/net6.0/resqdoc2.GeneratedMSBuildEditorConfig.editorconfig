@@ -16,6 +16,26 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes = true
 build_property.MSBuildProjectDirectory = C:\Users\rafad\OneDrive\Documentos\resqdoc2\resqdoc2
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/rafad/OneDrive/Documentos/resqdoc2/resqdoc2/Views/Cobrades/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29icmFkZXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rafad/OneDrive/Documentos/resqdoc2/resqdoc2/Views/Cobrades/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29icmFkZXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rafad/OneDrive/Documentos/resqdoc2/resqdoc2/Views/Cobrades/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29icmFkZXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rafad/OneDrive/Documentos/resqdoc2/resqdoc2/Views/Cobrades/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29icmFkZXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rafad/OneDrive/Documentos/resqdoc2/resqdoc2/Views/Cobrades/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29icmFkZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/rafad/OneDrive/Documentos/resqdoc2/resqdoc2/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

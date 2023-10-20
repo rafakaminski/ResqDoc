@@ -12,8 +12,8 @@ using resqdoc2.Models;
 namespace resqdoc2.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230831200008_Ocorrencia")]
-    partial class Ocorrencia
+    [Migration("20231010211052_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,6 +24,29 @@ namespace resqdoc2.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("resqdoc2.Models.Cobrade", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("Id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Cod")
+                        .HasColumnType("integer")
+                        .HasColumnName("Cod");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("Descricao");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cobrade");
+                });
+
             modelBuilder.Entity("resqdoc2.Models.ResqDoc.Models.Ocorrencia", b =>
                 {
                     b.Property<int>("Id")
@@ -33,12 +56,12 @@ namespace resqdoc2.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Cobrade")
+                    b.Property<int>("CobradeId")
                         .HasColumnType("integer")
-                        .HasColumnName("Cobrade");
+                        .HasColumnName("CobradeId");
 
-                    b.Property<DateTime>("DateTime")
-                        .HasColumnType("timestamp with time zone")
+                    b.Property<DateOnly>("Data")
+                        .HasColumnType("date")
                         .HasColumnName("Data");
 
                     b.Property<int>("Gravidade")
@@ -52,7 +75,20 @@ namespace resqdoc2.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OcorrenciaTbl");
+                    b.HasIndex("CobradeId");
+
+                    b.ToTable("OcorrenciaTabela");
+                });
+
+            modelBuilder.Entity("resqdoc2.Models.ResqDoc.Models.Ocorrencia", b =>
+                {
+                    b.HasOne("resqdoc2.Models.Cobrade", "Cobrade")
+                        .WithMany()
+                        .HasForeignKey("CobradeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cobrade");
                 });
 #pragma warning restore 612, 618
         }

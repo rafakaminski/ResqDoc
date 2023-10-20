@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using resqdoc2.Enums;
+
 using resqdoc2.Models;
 using resqdoc2.Models.ResqDoc.Models;
 
@@ -20,18 +23,50 @@ namespace resqdoc2.Controllers
         }
 
         // GET: Ocorrencias
-        public async Task<IActionResult> Index()
+
+        public IActionResult Index(string busca, string filtro)
         {
-              return _context.Ocorrencia != null ? 
-                          View(await _context.Ocorrencia.ToListAsync()) :
-                          Problem("Entity set 'Context.Ocorrencia'  is null.");
+            // Obtenha todos os registros de ocorrência do banco de dados
+            var ocorrencias = _context.Ocorrencia.ToList();
+
+            // Se a pesquisa não estiver vazia e o filtro for "titulo", filtre os resultados pelo título
+            if (!string.IsNullOrEmpty(busca) && filtro == "titulo")
+            {
+                busca = busca.ToLower(); // Converta a pesquisa para minúsculas para tornar a pesquisa insensível a maiúsculas e minúsculas
+
+                ocorrencias = ocorrencias.Where(o =>
+                    o.Titulo.ToLower().Contains(busca)
+                ).ToList();
+            }
+
+            // Se a pesquisa não estiver vazia e o filtro for "cobrade", filtre os resultados pelo Cobrade
+            //if (!string.IsNullOrEmpty(busca) && filtro == "cobrade")
+            //{
+            //    // Converta a entrada em um número inteiro
+            //    if (int.TryParse(busca, out int cobrade))
+            //    {
+            //        ocorrencias = ocorrencias.Where(o =>
+            //            o.Cobrade == cobrade
+            //        ).ToList();
+            //    }
+            //}
+
+            return View(ocorrencias);
         }
+
+
+
+
+
+
+
+
 
         // GET: Ocorrencias/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Ocorrencia == null)
-            {
+            {   
                 return NotFound();
             }
 
@@ -56,16 +91,29 @@ namespace resqdoc2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Titulo,Gravidade,DateTime,Cobrade")] Ocorrencia ocorrencia)
+        public async Task<IActionResult> Create([Bind("Id,Titulo,Gravidade,Data,Cobrade")] Ocorrencia ocorrencia, string Data)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(ocorrencia);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                // Converte a string Data em um DateTime
+                if (DateTime.TryParseExact(Data, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out var dataConvertida))
+                {
+                    // Converte o DateTime para DateOnly
+                    ocorrencia.Data = DateOnly.FromDateTime(dataConvertida);
+
+                    _context.Add(ocorrencia);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    ModelState.AddModelError("Data", "Formato de data inválido. Use o formato dd/MM/yyyy.");
+                }
             }
             return View(ocorrencia);
         }
+
+
 
         // GET: Ocorrencias/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -159,5 +207,7 @@ namespace resqdoc2.Controllers
         {
           return (_context.Ocorrencia?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+       
     }
 }

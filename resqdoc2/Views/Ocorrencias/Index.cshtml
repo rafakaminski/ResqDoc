@@ -1,16 +1,30 @@
 ﻿@model IEnumerable<resqdoc2.Models.ResqDoc.Models.Ocorrencia>
+@using resqdoc2.Models
+
+
+
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <div class="container">
-
-    <h1>Index</h1>
+    <h1>Ocorrencias</h1>
 
     <p>
         <a asp-action="Create">Create New</a>
     </p>
+
+    <!-- Barra de Pesquisa -->
+    <form method="get">
+        <input type="text" name="busca" placeholder="Pesquisar ..." />
+        <select name="filtro">
+            <option value="titulo">Título</option>
+            <option value="cobrade">Cobrade</option>
+        </select>
+        <button type="submit">Pesquisar</button>
+    </form>
+
     <table class="table">
         <thead>
             <tr>
@@ -21,7 +35,7 @@
                     @Html.DisplayNameFor(model => model.Gravidade)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.DateOnly)
+                    @Html.DisplayNameFor(model => model.Data)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Cobrade)
@@ -30,28 +44,28 @@
             </tr>
         </thead>
         <tbody>
-    @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Titulo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Gravidade)
-                </td>
-                <td>
-                        @Html.DisplayFor(modelItem => item.DateOnly)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cobrade)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-    }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Titulo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Gravidade)
+                    </td>
+                    <td>
+                        @item.DataFormatada
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cobrade)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
-
 </div>

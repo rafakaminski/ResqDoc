@@ -245,6 +245,10 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "C:\\Users\\rafad\\OneDrive\\Documentos\\resqdoc2\\resqdoc2\\wwwroot\\logopreto.png",
+      "PackagePath": "staticwebassets\\logopreto.png"
+    },
+    {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.resqdoc2.props",
       "PackagePath": "build\\resqdoc2.props"
     },

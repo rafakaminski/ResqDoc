@@ -11,5 +11,6 @@ namespace resqdoc2.Models
         { }
 
         public DbSet<Ocorrencia> Ocorrencia { get; set; }
+        public DbSet<Cobrade> Cobrade { get; set; }
     }
 }
